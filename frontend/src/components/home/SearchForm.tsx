@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface SearchFormProps {
   onSearch: (query: string, propertyType: string, status: string) => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
+const SearchForm = ({ onSearch }: SearchFormProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [propertyType, setPropertyType] = useState<string>("");
   const [status, setStatus] = useState<string>("");
@@ -18,152 +27,106 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   return (
     <form
       onSubmit={handleSearch}
-      className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-2xl border border-white/20"
+      className="bg-background/5 backdrop-blur-md p-6 rounded-lg border border-white/10 shadow-xl"
     >
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-2">
-          <input
+          <Input
             type="text"
             placeholder="Enter city, address, or ZIP code"
-            className="input bg-white/20 text-white placeholder-gray-300 border-0 focus:ring-2 focus:ring-primary-500 focus:bg-white/30"
+            className="w-full h-10 bg-background/10 text-white placeholder:text-white/70 rounded-md border-0 focus:ring-2 focus:ring-ring focus:bg-background/20 transition-colors"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div>
-          <select
-            className="input bg-white/20 text-white border-0 focus:ring-2 focus:ring-primary-500 focus:bg-white/30"
-            value={propertyType}
-            onChange={(e) => setPropertyType(e.target.value)}
-          >
-            <option value="" className="text-gray-800">
-              Property Type
-            </option>
-            <option value="house" className="text-gray-800">
-              House
-            </option>
-            <option value="apartment" className="text-gray-800">
-              Apartment
-            </option>
-            <option value="condo" className="text-gray-800">
-              Condo
-            </option>
-            <option value="land" className="text-gray-800">
-              Land
-            </option>
-            <option value="commercial" className="text-gray-800">
-              Commercial
-            </option>
-          </select>
+          <Select value={propertyType} onValueChange={setPropertyType}>
+            <SelectTrigger className="w-full h-10 bg-background/10 text-white border-0">
+              <SelectValue placeholder="Property Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="house">House</SelectItem>
+              <SelectItem value="apartment">Apartment</SelectItem>
+              <SelectItem value="condo">Condo</SelectItem>
+              <SelectItem value="land">Land</SelectItem>
+              <SelectItem value="commercial">Commercial</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         <div>
-          <select
-            className="input bg-white/20 text-white border-0 focus:ring-2 focus:ring-primary-500 focus:bg-white/30"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="" className="text-gray-800">
-              For Sale or Rent
-            </option>
-            <option value="for-sale" className="text-gray-800">
-              For Sale
-            </option>
-            <option value="for-rent" className="text-gray-800">
-              For Rent
-            </option>
-          </select>
+          <Select value={status} onValueChange={setStatus}>
+            <SelectTrigger className="w-full h-10 bg-background/10 text-white border-0">
+              <SelectValue placeholder="For Sale or Rent" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="for-sale">For Sale</SelectItem>
+              <SelectItem value="for-rent">For Rent</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
       {advancedSearch && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           <div>
-            <select className="input bg-white/20 text-white border-0 focus:ring-2 focus:ring-primary-500">
-              <option value="" className="text-gray-800">
-                Bedrooms
-              </option>
-              <option value="1" className="text-gray-800">
-                1+
-              </option>
-              <option value="2" className="text-gray-800">
-                2+
-              </option>
-              <option value="3" className="text-gray-800">
-                3+
-              </option>
-              <option value="4" className="text-gray-800">
-                4+
-              </option>
-              <option value="5" className="text-gray-800">
-                5+
-              </option>
-            </select>
+            <Select>
+              <SelectTrigger className="w-full h-10 bg-background/10 text-white border-0">
+                <SelectValue placeholder="Bedrooms" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">1+</SelectItem>
+                <SelectItem value="2">2+</SelectItem>
+                <SelectItem value="3">3+</SelectItem>
+                <SelectItem value="4">4+</SelectItem>
+                <SelectItem value="5">5+</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div>
-            <select className="input bg-white/20 text-white border-0 focus:ring-2 focus:ring-primary-500">
-              <option value="" className="text-gray-800">
-                Bathrooms
-              </option>
-              <option value="1" className="text-gray-800">
-                1+
-              </option>
-              <option value="2" className="text-gray-800">
-                2+
-              </option>
-              <option value="3" className="text-gray-800">
-                3+
-              </option>
-              <option value="4" className="text-gray-800">
-                4+
-              </option>
-            </select>
+            <Select>
+              <SelectTrigger className="w-full h-10 bg-background/10 text-white border-0">
+                <SelectValue placeholder="Bathrooms" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">1+</SelectItem>
+                <SelectItem value="2">2+</SelectItem>
+                <SelectItem value="3">3+</SelectItem>
+                <SelectItem value="4">4+</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div>
-            <select className="input bg-white/20 text-white border-0 focus:ring-2 focus:ring-primary-500">
-              <option value="" className="text-gray-800">
-                Price Range
-              </option>
-              <option value="100000" className="text-gray-800">
-                Under $100,000
-              </option>
-              <option value="200000" className="text-gray-800">
-                Under $200,000
-              </option>
-              <option value="300000" className="text-gray-800">
-                Under $300,000
-              </option>
-              <option value="500000" className="text-gray-800">
-                Under $500,000
-              </option>
-              <option value="750000" className="text-gray-800">
-                Under $750,000
-              </option>
-              <option value="1000000" className="text-gray-800">
-                Under $1,000,000
-              </option>
-              <option value="any" className="text-gray-800">
-                Any Price
-              </option>
-            </select>
+            <Select>
+              <SelectTrigger className="w-full h-10 bg-background/10 text-white border-0">
+                <SelectValue placeholder="Price Range" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="100000">Under $100,000</SelectItem>
+                <SelectItem value="200000">Under $200,000</SelectItem>
+                <SelectItem value="300000">Under $300,000</SelectItem>
+                <SelectItem value="500000">Under $500,000</SelectItem>
+                <SelectItem value="750000">Under $750,000</SelectItem>
+                <SelectItem value="1000000">Under $1,000,000</SelectItem>
+                <SelectItem value="any">Any Price</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       )}
 
       <div className="flex flex-col sm:flex-row justify-between items-center mt-4 gap-3">
-        <button
+        <Button
           type="button"
+          variant="ghost"
           onClick={() => setAdvancedSearch(!advancedSearch)}
-          className="text-sm text-gray-200 hover:text-white underline transition duration-200 w-full sm:w-auto text-center"
+          className="text-sm text-white/70 hover:text-white"
         >
           {advancedSearch ? "Simple Search" : "Advanced Search Options"}
-        </button>
+        </Button>
 
-        <button
-          type="submit"
-          className="btn bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
-        >
+        <Button type="submit" className="w-full sm:w-auto">
           Search Properties
-        </button>
+        </Button>
       </div>
     </form>
   );

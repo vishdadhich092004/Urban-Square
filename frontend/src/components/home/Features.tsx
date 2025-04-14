@@ -6,6 +6,14 @@ import {
   FaMoneyBillWave,
   FaChevronRight,
 } from "react-icons/fa";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const Features: React.FC = () => {
   const features = [
@@ -55,43 +63,55 @@ const Features: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div
+            <Card
               key={index}
-              className="feature-box group hover:bg-primary-600 hover:text-white transition-all duration-500"
+              className="group hover:bg-primary-600 hover:text-white transition-all duration-500"
             >
-              <div className="feature-icon group-hover:bg-white group-hover:text-primary-600 transition-all duration-500">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-white transition-all duration-300">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 mb-4 group-hover:text-white/90 transition-all duration-300">
-                {feature.description}
-              </p>
-              <a
-                href={feature.link}
-                className="inline-flex items-center text-primary-600 font-medium group-hover:text-white transition-all duration-300"
-              >
-                Learn More{" "}
-                <FaChevronRight className="ml-2 text-sm transition-transform group-hover:translate-x-1 duration-300" />
-              </a>
-            </div>
+              <CardHeader>
+                <div className="feature-icon group-hover:bg-white group-hover:text-primary-600 transition-all duration-500">
+                  {feature.icon}
+                </div>
+              </CardHeader>
+              <CardContent>
+                <CardTitle className="text-xl mb-3 group-hover:text-white transition-all duration-300">
+                  {feature.title}
+                </CardTitle>
+                <CardDescription className="text-gray-600 mb-4 group-hover:text-white/90 transition-all duration-300">
+                  {feature.description}
+                </CardDescription>
+              </CardContent>
+              <CardFooter>
+                <a
+                  href={feature.link}
+                  className="inline-flex items-center text-primary-600 font-medium group-hover:text-white transition-all duration-300"
+                >
+                  Learn More{" "}
+                  <FaChevronRight className="ml-2 text-sm transition-transform group-hover:translate-x-1 duration-300" />
+                </a>
+              </CardFooter>
+            </Card>
           ))}
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <div className="text-primary-600 font-bold text-4xl">10K+</div>
-            <div className="text-gray-600">Happy Customers</div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <div className="text-primary-600 font-bold text-4xl">500+</div>
-            <div className="text-gray-600">Properties Sold</div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <div className="text-primary-600 font-bold text-4xl">99%</div>
-            <div className="text-gray-600">Customer Satisfaction</div>
-          </div>
+          <Card className="p-4">
+            <CardContent>
+              <div className="text-primary-600 font-bold text-4xl">10K+</div>
+              <div className="text-gray-600">Happy Customers</div>
+            </CardContent>
+          </Card>
+          <Card className="p-4">
+            <CardContent>
+              <div className="text-primary-600 font-bold text-4xl">500+</div>
+              <div className="text-gray-600">Properties Sold</div>
+            </CardContent>
+          </Card>
+          <Card className="p-4">
+            <CardContent>
+              <div className="text-primary-600 font-bold text-4xl">99%</div>
+              <div className="text-gray-600">Customer Satisfaction</div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
